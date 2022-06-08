@@ -1,16 +1,32 @@
-# remark-mdx-frontmatter
+# remark-mdx-rakkas
 
-[![github actions][github actions badge]][github actions] [![npm][npm badge]][npm]
-[![prettier][prettier badge]][prettier]
-
-> A [remark][] plugin for converting frontmatter metadata into MDX exports
+> This is a fork of [remark-mdx-frontmatter](https://github.com/remcohaszing/remark-mdx-frontmatter) that is made to work nicely with [Rakkas](https://github.com/rakkasjs/rakkasjs)
 
 ## Installation
 
-This package depends on the AST output by [remark-frontmatter][]
+First, install this package and the `remark-frontmatter` one that it relies on.
 
 ```sh
-npm install remark-frontmatter remark-mdx-frontmatter
+npm install remark-frontmatter @trevorblades/remark-mdx-rakkas
+```
+
+In your Rakkas config:
+
+```js
+import mdx from '@cyco130/vite-plugin-mdx';
+import {remarkMdxRakkas} from '@trevorblades/remark-mdx-rakkas';
+import remarkFrontmatter from 'remark-frontmatter';
+
+export default {
+  pageExtensions: ['jsx', 'tsx', 'mdx'],
+  vite: {
+    plugins: [
+      mdx({
+        remarkPlugins: [remarkFrontmatter, remarkMdxRakkas]
+      })
+    ]
+  }
+}
 ```
 
 ## Usage
@@ -30,45 +46,16 @@ Rest of document
 
 The following script:
 
-```js
-import { readFileSync } from 'fs';
-
-import remarkFrontmatter from 'remark-frontmatter';
-import { remarkMdxFrontmatter } from 'remark-mdx-frontmatter';
-import { compileSync } from 'xdm';
-
-const { contents } = compileSync(readFileSync('example.mdx'), {
-  jsx: true,
-  remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
-});
-console.log(contents);
-```
-
-Roughly yields:
-
 ```jsx
-export const hello = 'frontmatter';
+import {Helmet} from 'react-helmet-async';
 
-export default function MDXContent() {
-  return <p>Rest of document</p>;
+export default function Layout({children, meta}) {
+  <>
+    <Helmet title={meta.title}>
+      <meta content={meta.description} name="description" />
+    </Helmet>
+    <h1>{meta.title}</h1>
+    {children}
+  </>
 }
 ```
-
-### Options
-
-#### `name`
-
-By default, every frontmatter object key is turned into a JavaScript export. If `name` is specified,
-the YAML content is exported as one single export using this name. This is useful if you wish to use
-top-level frontmatter nodes other than objects, or if the frontmatter content contains keys which
-aren’t valid JavaScript identifiers.
-
-[github actions badge]:
-  https://github.com/remcohaszing/remark-mdx-frontmatter/actions/workflows/ci.yml/badge.svg
-[github actions]: https://github.com/remcohaszing/remark-mdx-frontmatter/actions/workflows/ci.yml
-[npm badge]: https://img.shields.io/npm/v/remark-mdx-frontmatter
-[npm]: https://www.npmjs.com/package/remark-mdx-frontmatter
-[prettier badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
-[prettier]: https://prettier.io
-[remark]: https://remark.js.org
-[remark-frontmatter]: https://github.com/remarkjs/remark-frontmatter

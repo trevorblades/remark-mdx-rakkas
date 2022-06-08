@@ -1,18 +1,18 @@
 {
-  "name": "remark-mdx-frontmatter",
+  "name": "@trevorblades/remark-mdx-rakkas",
   "version": "1.1.1",
   "description": "A remark plugin for converting frontmatter metadata into MDX exports",
   "main": "dist/index.js",
-  "author": "Remco Haszing <remcohaszing@gmail.com>",
+  "author": "Trevor Blades <tdblades@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/remcohaszing/remark-mdx-frontmatter.git"
+    "url": "git+https://github.com/trevorblades/remark-mdx-rakkas.git"
   },
   "bugs": {
-    "url": "https://github.com/remcohaszing/remark-mdx-frontmatter/issues"
+    "url": "https://github.com/trevorblades/remark-mdx-rakkas/issues"
   },
-  "homepage": "https://github.com/remcohaszing/remark-mdx-frontmatter#readme",
+  "homepage": "https://github.com/trevorblades/remark-mdx-rakkas#readme",
   "keywords": [
     "frontmatter",
     "markdown",
@@ -24,7 +24,9 @@
     "toml",
     "unified",
     "xdm",
-    "yaml"
+    "yaml",
+    "rakkas",
+    "rakkasjs"
   ],
   "files": [
     "dist"
@@ -37,7 +39,6 @@
     "test": "ts-node index.test.mjs"
   },
   "dependencies": {
-    "estree-util-is-identifier-name": "^1.0.0",
     "estree-util-value-to-estree": "^1.0.0",
     "js-yaml": "^4.0.0",
     "toml": "^3.0.0"
@@ -51,7 +52,7 @@
     "eslint-config-remcohaszing": "^3.0.0",
     "eslint-plugin-eslint-comments": "^3.0.0",
     "eslint-plugin-import": "^2.0.0",
-    "eslint-plugin-jsdoc": "^37.0.0",
+    "eslint-plugin-jsdoc": "^39.3.2",
     "eslint-plugin-jsx-a11y": "^6.0.0",
     "eslint-plugin-markdown": "^2.0.0",
     "eslint-plugin-node": "^11.0.0",
