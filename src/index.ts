@@ -62,4 +62,4 @@ const transformer: Transformer = (ast) => {
   mdast.children.unshift(...imports);
 };
 
-export const remarkMdxFrontmatter: Attacher = () => transformer;
+export const remarkMdxRakkas: Attacher = () => transformer;
