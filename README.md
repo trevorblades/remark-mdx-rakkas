@@ -4,13 +4,13 @@
 
 ## Installation
 
-First, install this package and the `remark-frontmatter` one that it relies on.
+First, install this package, along with `remark-frontmatter`, which it relies on.
 
-```sh
+```bash
 npm install remark-frontmatter @trevorblades/remark-mdx-rakkas
 ```
 
-In your Rakkas config:
+In your Rakkas config, you should have a standard-looking MDX configuration, using a Vite plugin and adding `mdx` to your array of `pageExtensions`. Pass this module and the `remarkFrontmatter` to your MDX plugin as the `remarkPlugins` option.
 
 ```js
 import mdx from '@cyco130/vite-plugin-mdx';
@@ -31,20 +31,21 @@ export default {
 
 ## Usage
 
-This remark plugin takes frontmatter content, and outputs it as JavaScript exports. Both YAML and
-TOML frontmatter data are supported.
+This remark plugin takes frontmatter content, and makes it available to your layout components in Rakkas. Both YAML and TOML frontmatter data are supported.
 
-For example, given a file named `example.mdx` with the following contents:
+For example, given a file named `page.mdx` with the following contents:
 
 ```mdx
 ---
-hello: frontmatter
+title: Getting started
 ---
 
-Rest of document
+This is how you get started...
+
+<InteractiveComponent />
 ```
 
-The following script:
+The following component, `layout.jsx` can read its child pages' frontmatter by accessing the `meta` prop.
 
 ```jsx
 import {Helmet} from 'react-helmet-async';
